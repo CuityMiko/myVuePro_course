@@ -1,0 +1,9 @@
+{
+  "name": "vue-boilerplate",
+  "version": "1.0.0",
+  "description": "A starter project for Vue",
+  "homepage": "https://github.com/CuityMiko",
+  "license": "ISC",
+  "dependencies": {
+  }
+}

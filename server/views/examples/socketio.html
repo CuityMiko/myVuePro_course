@@ -1,0 +1,89 @@
+<style>
+    .socketio{
+        border: 1px solid #ccc;
+        padding: 9px;
+        margin: 9px;
+    }
+    .content{
+        border: 1px solid #ccc;
+        padding: 9px;
+        margin: 9px;
+        display: flex;
+        flex-direction: column;
+    }
+    .item{
+        flex: 1;
+    }
+    .self{
+        text-align: right;
+        color: blue;
+    }
+    .hiden{
+        display: none;
+    }
+</style>
+
+<div class="socketio" id="app">
+    <h3>socket.io --- <%=model.name %></h3>
+    <div :class="{hiden:name=='zhangsan'}"><input type="radio" v-model="sendname" name="sendname" value="zhangsan">张三</div>
+    <div :class="{hiden:name=='lisi'}"><input type="radio" v-model="sendname" name="sendname" value="lisi">李四</div>
+    <div :class="{hiden:name=='wangwu'}"><input type="radio" v-model="sendname" name="sendname" value="wangwu">王五</div>
+    <div><input type="radio" v-model="sendname" name="sendname" value="qunfa">群发</div>
+    <input type="hidden" id="hdname" value="<%=model.name %>"/>
+    <hr/>
+    <div class="content" v-if="list.length>0">
+        <div v-for="(item,index) in list" :class="{ item,self:item.self }" :key="index">{{item.name}}:{{item.msg}}</div>
+    </div>
+    <input type="text" v-model="msg" @keyup.enter="sendmsg" placeholder="请输入内容...">
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    // 与服务器创建socket连接
+    const socket = io();
+    const name=document.getElementById('hdname').value;
+
+    const app=new Vue({
+        el: '#app',
+        data:{
+            msg:'',
+            list:[],
+            sendname:'qunfa',
+            name:name
+        },
+        methods:{
+            sendmsg(){
+                // 向服务器端发送消息
+                this.list.push({
+                    name:name,
+                    msg:this.msg,
+                    self:true
+                })
+                let content={
+                    name:name,
+                    msg:this.msg,
+                    sendname:this.sendname,
+                    isall:this.sendname=="qunfa"?true:false
+                }
+                socket.emit("SenMsg",content)
+                this.msg=''
+            }
+        },
+        mounted(){
+            // 添加用户
+            socket.emit("newUser",name)
+            // 获取服务器端传过来的消息
+            socket.on("replyMsg",(data)=>{
+                console.log('replyMsgOn')
+                console.log(data);
+                if(data.name!=name){
+                    this.list.push({
+                        name:data.name,
+                        msg:data.msg,
+                        self:false
+                    })
+                }
+            })
+        }
+    });
+</script>
