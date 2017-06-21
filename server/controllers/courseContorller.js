@@ -38,4 +38,19 @@ var register=function(req, res, next){
         res.json({result:false,msg:"注册失败"});
     })
 }
-module.exports = { login,register }
+
+// 添加课程
+var addcourse=(req, res, next)=>{
+    let _courses=req.body.courses.split(',');
+    courseServices.addCourse(_courses,()=>{
+        res.json({result:true,msg:"课程添加成功"});
+    })
+}
+
+// 获取课程
+var getcourses=(req, res, next)=>{
+    courseServices.getCourses((err,data)=>{
+        res.json({result:true,msg:"获取成功",data:data});
+    })
+}
+module.exports = { login,register,addcourse,getcourses }

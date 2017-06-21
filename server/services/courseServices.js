@@ -3,6 +3,7 @@
  */
 const request = mypro.core.request;
 const User=mypro.models.User;
+const Course=mypro.models.Course;
 
 // 注册
 var register = function (jsonObj) {
@@ -14,4 +15,14 @@ var login = function (jsonObj) {
     return User.userLogin(jsonObj);
 }
 
-module.exports = { register,login };
+// 添加课程
+var addCourse=(jsonObj,callback)=>{
+    Course.add(jsonObj,callback);
+}
+
+// 添加课程
+var getCourses=(callback)=>{
+    Course.get(callback);
+}
+
+module.exports = { register,login,addCourse,getCourses };

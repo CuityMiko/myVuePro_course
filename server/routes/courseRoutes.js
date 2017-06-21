@@ -9,4 +9,8 @@ module.exports = function (app) {
     app.post('/course/login',courseController.login); 
     // 注册
     app.post('/course/register',courseController.register);
+    // 添加课程
+    app.post('/course/addcourse',courseController.addcourse);
+    // 获取课程
+    app.post('/course/getcourses',courseController.getcourses);
 }

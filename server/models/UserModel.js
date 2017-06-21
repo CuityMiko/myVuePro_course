@@ -1,6 +1,7 @@
 /**
  * User数据模型操作
  */
+// const mongodb=mypro.core.mongodb;
 const mongodb=require('../core/mongodb')
 
 // 定义User Schema结构

@@ -27,4 +27,24 @@ export default class CourseService{
         let _url=`${this.serverUrl}/course/login`;
         return HttpHelper.Post(_url,parmas,vrobj);
     }
+
+     /**
+     * 添加课程
+     * @param {*参数} parmas 
+     * @param {*可选参数：Vue根实例的$http} vrobj 
+     */
+    static AddCourses(parmas,vrobj=null){
+        let _url=`${this.serverUrl}/course/addcourse`;
+        return HttpHelper.Post(_url,parmas,vrobj);
+    }
+
+     /**
+     * 获取课程
+     * @param {*参数} parmas 
+     * @param {*可选参数：Vue根实例的$http} vrobj 
+     */
+    static GetCourses(parmas,vrobj=null){
+        let _url=`${this.serverUrl}/course/getcourses`;
+        return HttpHelper.Post(_url,parmas,vrobj);
+    }
 }
