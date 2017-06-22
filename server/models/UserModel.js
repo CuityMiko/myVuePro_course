@@ -29,6 +29,39 @@ var findByName=(username)=>{
 }
 
 /**
+ * 封装修改方法
+ * conditions:查询条件
+ * updated:修改内容
+ */
+userSchema.statics.modify=(conditions,updated)=>{
+    let _conditions = conditions;
+    let _update = {$set : updated};
+    let _options = {upsert : true};
+    let _userModel=mongodb.db.model('User');
+    return new Promise((resolve,reject)=>{
+        _userModel.update(_conditions,_update,_options,(err,result)=>{
+            if(err)
+                reject(err);
+            else
+                resolve(result);
+        })
+    })
+}
+
+userSchema.statics.getPagedata=(conditions,pageindex,pagesize)=>{
+    let _start=(parseInt(pageindex)-1)*pagesize;
+    let _userModel=mongodb.db.model('User');
+    return new Promise((resolve,reject)=>{
+        _userModel.find(conditions,(err,result)=>{
+            if(err)
+                reject(err);
+            else
+                resolve(result);
+        }).skip(_start).limit(pagesize)
+    })
+}
+
+/**
  * 用户登录
  */
 userSchema.statics.userLogin=(user)=>{

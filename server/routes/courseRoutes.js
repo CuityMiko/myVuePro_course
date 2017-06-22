@@ -13,4 +13,6 @@ module.exports = function (app) {
     app.post('/course/addcourse',courseController.addcourse);
     // 获取课程
     app.post('/course/getcourses',courseController.getcourses);
+    // 选课
+    app.post('/course/update',courseController.update);
 }

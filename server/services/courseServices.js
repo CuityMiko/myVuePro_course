@@ -25,4 +25,9 @@ var getCourses=(callback)=>{
     Course.get(callback);
 }
 
-module.exports = { register,login,addCourse,getCourses };
+// 选课
+var modify = function (condition,updated) {
+    return User.modify(condition,updated);
+}
+
+module.exports = { register,login,addCourse,getCourses,modify };

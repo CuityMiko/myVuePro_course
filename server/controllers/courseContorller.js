@@ -53,4 +53,23 @@ var getcourses=(req, res, next)=>{
         res.json({result:true,msg:"获取成功",data:data});
     })
 }
-module.exports = { login,register,addcourse,getcourses }
+
+// 选课
+var update=(req, res, next)=>{
+    // 重构用户信息
+    let condition={
+        username:req.body.username
+    }
+    let _courses=req.body.courses.split(',');
+    let _updated={
+        courses:_courses
+    }
+    courseServices.modify(condition,_updated).then((result)=>{
+        res.json({result:true,msg:"更新成功！"});
+    },(err)=>{
+        res.json({result:false,msg:"更新失败！"});
+    }).catch((err)=>{
+        res.json({result:false,msg:"更新失败！"});
+    })
+}
+module.exports = { login,register,addcourse,getcourses,update }
