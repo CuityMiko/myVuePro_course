@@ -87,7 +87,7 @@
                   if(_username)
                     localsession.localDel("username");
                 }
-                that.$router.push('/home');
+                that.$router.push('/home/1');
               }
               else{
                 this.$message.error(res.msg);

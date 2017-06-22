@@ -48,16 +48,24 @@ userSchema.statics.modify=(conditions,updated)=>{
     })
 }
 
-userSchema.statics.getPagedata=(conditions,pageindex,pagesize)=>{
-    let _start=(parseInt(pageindex)-1)*pagesize;
+/**
+ * 分页
+ */
+userSchema.statics.getPagedata=(conditions,pageindex,pagesize,callback)=>{
+    let _start=(parseInt(pageindex)-1)*parseInt(pagesize);
     let _userModel=mongodb.db.model('User');
-    return new Promise((resolve,reject)=>{
-        _userModel.find(conditions,(err,result)=>{
-            if(err)
-                reject(err);
-            else
-                resolve(result);
-        }).skip(_start).limit(pagesize)
+    let _result=_userModel.find(conditions);
+    _result.skip(_start).limit(parseInt(pagesize)).exec((err,pdata)=>{
+        if(err)
+            callback(err,null)
+        else{
+            _userModel.find(conditions).count((err,data)=>{
+                if(err)
+                    callback(err,null)
+                else
+                    callback(null,{total:data,result:pdata});
+            });
+        }
     })
 }
 

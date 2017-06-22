@@ -15,7 +15,7 @@ const NoFindContainer = r => require.ensure([], () => r(require('../containers/N
 
 export default[
     {
-        path:'/home',
+        path:'/home/:page',
         component:HomeContainer,
         beforeEnter: (to, from, next) => { // 单个路由的导航钩子
             next();
@@ -25,6 +25,6 @@ export default[
     {path:'/coursemag',component:CourseMagContainer}, // 课程管理
     {path:'/login',component:LoginContainer}, // 登录
     {path:'/register',component:RegisterContainer}, // 注册
-    {path:'/',redirect:'/home'}, // 如果路由为/的时候跳转到/home路由
+    {path:'/',redirect:'/home/1'}, // 如果路由为/的时候跳转到/home路由
     {path:'*',component:NoFindContainer} // 此配置要放在最下面，如果没有匹配到路由则404
 ]

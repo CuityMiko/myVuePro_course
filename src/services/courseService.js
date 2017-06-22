@@ -57,4 +57,14 @@ export default class CourseService{
         let _url=`${this.serverUrl}/course/update`;
         return HttpHelper.Post(_url,parmas,vrobj);
     }
+
+    /**
+     * 分页
+     * @param {*参数} parmas 
+     * @param {*可选参数：Vue根实例的$http} vrobj 
+     */
+    static GetPageData(parmas,vrobj=null){
+        let _url=`${this.serverUrl}/course/paged`;
+        return HttpHelper.Post(_url,parmas,vrobj);
+    }
 }

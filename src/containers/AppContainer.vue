@@ -33,12 +33,12 @@
             <el-row type="flex" class="row-bg" justify="space-between">
                 <el-col :span="6">
                     <div class="logo">
-                        <router-link to="/home">{{title}}</router-link>
+                        <router-link to="/home/1">{{title}}</router-link>
                     </div>
                 </el-col>
                 <el-col :span="12">
                     <el-menu-item index="1">
-                        <router-link to="/home">首页</router-link>
+                        <router-link to="/home/1">首页</router-link>
                     </el-menu-item>
                     <el-menu-item index="2">
                         <router-link to="/course">选课</router-link>

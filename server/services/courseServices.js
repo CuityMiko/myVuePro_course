@@ -30,4 +30,9 @@ var modify = function (condition,updated) {
     return User.modify(condition,updated);
 }
 
-module.exports = { register,login,addCourse,getCourses,modify };
+// 选课
+var getPagedata = function (condition,pageindex,pagesize,callback) {
+    return User.getPagedata(condition,pageindex,pagesize,callback);
+}
+
+module.exports = { register,login,addCourse,getCourses,modify,getPagedata };

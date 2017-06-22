@@ -15,4 +15,6 @@ module.exports = function (app) {
     app.post('/course/getcourses',courseController.getcourses);
     // 选课
     app.post('/course/update',courseController.update);
+    // 获取分页数据
+    app.post('/course/paged',courseController.getPagedata);
 }

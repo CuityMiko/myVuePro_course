@@ -72,4 +72,15 @@ var update=(req, res, next)=>{
         res.json({result:false,msg:"更新失败！"});
     })
 }
-module.exports = { login,register,addcourse,getcourses,update }
+
+// 获取分页数据
+var getPagedata=(req, res, next)=>{
+    courseServices.getPagedata(JSON.parse(req.body.conditions),req.body.pageindex,req.body.pagesize,(err,data)=>{
+        if(err)
+            res.json({result:false,msg:"获取数据失败！"});
+        else
+            res.json({result:true,msg:"获取数据成功！",data:data});
+    })
+}
+
+module.exports = { login,register,addcourse,getcourses,update,getPagedata }
